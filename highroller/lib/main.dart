@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'setup.dart';
+import 'game.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -7,63 +8,33 @@ import 'setup.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/',
+    initialRoute: '/game',
     routes: {
-      '/': (context) => MyApp(),
-      '/join': (context) => JoinGame(),
+      '/': (context) => HomePage(),
+      '/join': (context) => JoinForm(),
+      '/new': (context) => NewGame(),
+      '/game': (context) => GameHome(),
     },
   ));
 }
 
-class MyApp extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Logo(),
-            ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, '/join'),
-                child: Text("New Game")),
-            ElevatedButton(
-                onPressed: _incrementCounter, child: Text("Join Game")),
-          ],
-        ),
-      ),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Logo(),
+          ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/new'),
+              child: Text("New Game")),
+          ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/join'),
+              child: Text("Join Game")),
+        ],
+      )),
     );
   }
 }
