@@ -27,9 +27,14 @@ class GameHomeState extends State<GameHome> {
 }
 
 class PlayerList extends StatelessWidget {
-  final String playername = "player";
-  final int playercoins = 0;
+  final String playername;
+  final int playercoins;
+  PlayerList(int coins, String name) {
+    playername = name;
+    playercoins = coins;
+  };
 
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,8 +45,10 @@ class PlayerList extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(children: [
-            Spacer(),
+          Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            Spacer(
+              flex: 3,
+            ),
             Text(
               playername,
               textAlign: TextAlign.center,
@@ -53,7 +60,9 @@ class PlayerList extends StatelessWidget {
             ),
             Spacer(),
             ElevatedButton(onPressed: null, child: Text("Pay")),
-            Spacer(),
+            Spacer(
+              flex: 3,
+            ),
           ]),
         ],
       ),
