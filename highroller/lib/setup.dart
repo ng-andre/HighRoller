@@ -7,6 +7,10 @@ class JoinForm extends StatefulWidget {
   _JoinFormState createState() => _JoinFormState();
 }
 
+//extract form to new class
+//replace form with new state
+
+
 class _JoinFormState extends State<JoinForm> {
   final _formKey = GlobalKey<FormState>();
 

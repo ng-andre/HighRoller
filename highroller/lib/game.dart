@@ -27,12 +27,12 @@ class GameHomeState extends State<GameHome> {
 }
 
 class PlayerList extends StatelessWidget {
-  final String playername;
-  final int playercoins;
-  PlayerList(int coins, String name) {
-    playername = name;
-    playercoins = coins;
-  };
+  final String playername = "player";
+  final int playercoins = 0;
+  // PlayerList(int coins, String name) {
+  //   playername = name;
+  //   playercoins = coins;
+  // };
 
   
   @override

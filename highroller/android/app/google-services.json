@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "296002335617",
+    "project_id": "highroller-app",
+    "storage_bucket": "highroller-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296002335617:android:e22484fd2a765eb5acee80",
+        "android_client_info": {
+          "package_name": "com.example.highroller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "296002335617-hkvqsr3sjhimjfgl2ss4ersbn7v1k7j6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVTxULBVAhJjKnVkJlBBOYfz2GIYfxtoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "296002335617-hkvqsr3sjhimjfgl2ss4ersbn7v1k7j6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
