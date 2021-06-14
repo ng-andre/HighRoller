@@ -56,14 +56,15 @@ class NewGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        // alignment: Alignment.center,
+      body: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(100.0),
         // mainAxisAlignment: MainAxisAlignment,
         child: Column(
           children: <Widget>[
-            Text("test"),
-            Text("test"),
-            Text("test"),
+            // Text("test"),
+            // Text("test"),
+            // Text("test"),
             DropdownMenu(),
           ],
         ),
@@ -81,6 +82,49 @@ class DropdownMenu extends StatefulWidget {
 
 class _DropdownMenuState extends State<DropdownMenu> {
   String dropdownValue = 'Chips Only';
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const Icon(Icons.arrow_downward),
+      iconSize: 24,
+      elevation: 16,
+      style: const TextStyle(color: Colors.deepPurple),
+      underline: Container(
+        height: 2,
+        color: Colors.deepPurpleAccent,
+      ),
+      onChanged: (String? newValue) {
+        setState(() {
+          dropdownValue = newValue!;
+        });
+      },
+      items: <String>[
+        'Chips Only',
+        'Poker',
+        'Mahjong',
+        'Chips with Common Pool'
+      ].map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
+
+class DropdownGameType extends StatefulWidget {
+  // const DropdownGameType({Key key}) : super(key: key);
+
+  @override
+  _DropdownGameTypeState createState() => _DropdownGameTypeState();
+}
+
+class _DropdownGameTypeState extends State<DropdownGameType> {
+  String dropdownValue = 'Chips Only';
+
 
   @override
   Widget build(BuildContext context) {
