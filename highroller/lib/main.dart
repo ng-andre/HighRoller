@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'setup.dart';
 import 'game.dart';
+import 'mahjong.dart';
+// import 'package:flutter/services.dart';
 // import 'package:firebase_core/firebase_core.dart';
-
 
 Future<void> main() async {
   // await Firebase.initializeApp();
   runApp(MaterialApp(
-    initialRoute: '/game',
+    initialRoute: '/',
     routes: {
       '/': (context) => HomePage(),
       '/join': (context) => JoinForm(),
       '/new': (context) => NewGame(),
       '/game': (context) => GameHome(),
+      '/mahjong': (context) => MahjongSetup(),
     },
   ));
 }
