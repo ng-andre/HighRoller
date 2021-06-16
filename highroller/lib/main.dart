@@ -1,9 +1,11 @@
+// @dart=2.9
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'setup.dart';
 import 'game.dart';
 import 'mahjong.dart';
-// import 'package:flutter/services.dart';
-// import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   // await Firebase.initializeApp();
@@ -34,6 +36,9 @@ class HomePage extends StatelessWidget {
           ElevatedButton(
               onPressed: () => Navigator.pushNamed(context, '/join'),
               child: Text("Join Game")),
+          ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/mahjong'),
+              child: Text("Testing")),
         ],
       )),
     );

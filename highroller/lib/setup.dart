@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class NewGame extends StatelessWidget {
   const NewGame({Key? key}) : super(key: key);
@@ -34,9 +36,7 @@ class NewGame extends StatelessWidget {
                 // return 'Please enter a Room Key';
               },
             ),
-            Spacer(
-                // flex: 2,
-                ),
+            Spacer(),
             ElevatedButton(
                 onPressed: () => Navigator.pushNamed(context, '/game'),
                 child: Text("Done")),
