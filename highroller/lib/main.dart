@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:highroller/firebase.dart';
 import 'setup.dart';
 import 'game.dart';
 import 'mahjong.dart';
 
 Future<void> main() async {
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
@@ -17,6 +19,7 @@ Future<void> main() async {
       '/new': (context) => NewGame(),
       '/game': (context) => GameHome(),
       '/mahjong': (context) => MahjongSetup(),
+      '/testing': (context) => TestPage(),
     },
   ));
 }
@@ -37,7 +40,7 @@ class HomePage extends StatelessWidget {
               onPressed: () => Navigator.pushNamed(context, '/join'),
               child: Text("Join Game")),
           ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/mahjong'),
+              onPressed: () => Navigator.pushNamed(context, '/testing'),
               child: Text("Testing")),
         ],
       )),
