@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "296002335617",
+    "firebase_url": "https://highroller-app-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "highroller-app",
     "storage_bucket": "highroller-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:296002335617:android:e22484fd2a765eb5acee80",
+        "mobilesdk_app_id": "1:296002335617:android:e78069ea2d563ba3acee80",
         "android_client_info": {
           "package_name": "com.example.highroller"
         }

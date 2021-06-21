@@ -3,13 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:highroller/firebase.dart';
 import 'setup.dart';
 import 'game.dart';
 import 'mahjong.dart';
 import 'lobby.dart';
 
 Future<void> main() async {
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
@@ -19,7 +21,6 @@ Future<void> main() async {
       '/game': (context) => GameHome(),
       '/mahjong': (context) => MahjongSetup(),
       '/lobby': (context) => InGame(),
-
     },
   ));
 }
