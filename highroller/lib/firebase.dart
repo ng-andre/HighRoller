@@ -13,10 +13,10 @@ class _TestPageState extends State<TestPage> {
   final Future<FirebaseApp> _future = Firebase.initializeApp();
 
   void addData(String data) {
-    databaseRef.push().set({'name': data, 'comment': 'A good season'});
+    databaseRef.push().set({'user': data, 'chips': 5});
   }
 
-  void printFirebase(){
+  void printFirebase() {
     databaseRef.once().then((DataSnapshot snapshot) {
       print('Data : ${snapshot.value}');
     });
@@ -47,21 +47,17 @@ class _TestPageState extends State<TestPage> {
                     ),
                     SizedBox(height: 30.0),
                     Center(
-                      child: RaisedButton(
-                          color: Colors.pinkAccent,
-                          child: Text("Save to Database"),
-                          onPressed: () {
-                            addData(textcontroller.text);
-                            //call method flutter upload
-                          }
-                        )
-                     ),
+                        child: ElevatedButton(
+                            child: Text("Save to Database"),
+                            onPressed: () {
+                              addData(textcontroller.text);
+                              //call method flutter upload
+                            })),
                   ],
                 ),
               );
             }
-          }
-       ),
+          }),
     );
   }
 }

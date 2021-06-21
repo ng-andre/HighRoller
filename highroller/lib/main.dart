@@ -28,8 +28,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Column(
+      body: SafeArea(
+      child: Center(
+        child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Logo(),
@@ -43,7 +44,9 @@ class HomePage extends StatelessWidget {
               onPressed: () => Navigator.pushNamed(context, '/testing'),
               child: Text("Testing")),
         ],
-      )),
+      ),
+      ),
+      ),
     );
   }
 }

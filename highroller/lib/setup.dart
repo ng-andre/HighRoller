@@ -10,7 +10,8 @@ class NewGame extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
+      body: SafeArea(
+        child: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.all(100.0),
         // mainAxisAlignment: MainAxisAlignment,
@@ -46,6 +47,7 @@ class NewGame extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 }
