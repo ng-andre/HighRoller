@@ -7,6 +7,7 @@ import 'package:highroller/firebase.dart';
 import 'setup.dart';
 import 'game.dart';
 import 'mahjong.dart';
+import 'lobby.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,7 @@ Future<void> main() async {
       '/new': (context) => NewGame(),
       '/game': (context) => GameHome(),
       '/mahjong': (context) => MahjongSetup(),
-      '/testing': (context) => TestPage(),
+      '/lobby': (context) => InGame(),
     },
   ));
 }
@@ -41,7 +42,7 @@ class HomePage extends StatelessWidget {
               onPressed: () => Navigator.pushNamed(context, '/join'),
               child: Text("Join Game")),
           ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/testing'),
+              onPressed: () => Navigator.pushNamed(context, '/lobby'),
               child: Text("Testing")),
         ],
       ),
