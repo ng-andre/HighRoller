@@ -2,9 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:random_string/random_string.dart';
+import 'dart:math' show Random;
 
 class NewGame extends StatelessWidget {
-  const NewGame({Key? key}) : super(key: key);
+  // const NewGame({Key? key}) : super(key: key);
+  final databaseRef = FirebaseDatabase.instance.reference();
+  final Future<FirebaseApp> _future = Firebase.initializeApp();
+
+  final String roomID = randomAlphaNumeric(5);
+
+  void setRoom() {
+    //create room with random 5 letter name
+    databaseRef.child(roomID).set(roomID);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,42 +23,40 @@ class NewGame extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(100.0),
-        // mainAxisAlignment: MainAxisAlignment,
-        child: Column(
-          children: <Widget>[
-            Spacer(
-              flex: 3,
-            ),
-            Text("Select Game Mode:"),
-            DropdownMenu(),
-            Spacer(),
-            Text("Enter Starting Amount:"),
-            TextFormField(
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-              ],
-              keyboardType: TextInputType.number,
-              // The validator receives the text that the user has entered.
-              validator: (value) {
-                // if (value == null || value < 0) {
-                //   return 'Please enter a Room Key';
-                // }
-                // return 'Please enter a Room Key';
-              },
-            ),
-            Spacer(),
-            ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, '/game'),
-                child: Text("Done")),
-            Spacer(
-              flex: 4,
-            ),
-          ],
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(100.0),
+          child: Column(
+            children: <Widget>[
+              Spacer(flex: 3),
+              Text("Select Game Mode:"),
+              DropdownMenu(),
+              Spacer(),
+              Text("Enter Starting Amount:"),
+              TextFormField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                keyboardType: TextInputType.number,
+                // The validator receives the text that the user has entered.
+                validator: (value) {
+                  // if (value == null || value < 0) {
+                  //   return 'Please enter a Room Key';
+                  // }
+                  // return 'Please enter a Room Key';
+                },
+              ),
+              Spacer(),
+              ElevatedButton(
+                  onPressed: () {
+                    setRoom();
+                    Navigator.pushNamed(context, '/game');
+                  },
+                  child: Text("Done")),
+              Spacer(flex: 4),
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }

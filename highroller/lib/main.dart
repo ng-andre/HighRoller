@@ -7,7 +7,8 @@ import 'package:highroller/firebase.dart';
 import 'setup.dart';
 import 'game.dart';
 import 'mahjong.dart';
-import 'lobby.dart';
+import 'newgamebeta.dart';
+import 'joingamebeta.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,11 +17,11 @@ Future<void> main() async {
     initialRoute: '/',
     routes: {
       '/': (context) => HomePage(),
-      '/join': (context) => JoinForm(),
-      '/new': (context) => NewGame(),
+      '/new': (context) => BetaNewGame(),
+      '/join': (context) => BetaJoinGame(),
       '/game': (context) => GameHome(),
       '/mahjong': (context) => MahjongSetup(),
-      '/lobby': (context) => InGame(),
+      '/testing': (context) => TestPage(),
     },
   ));
 }
@@ -30,23 +31,23 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-      child: Center(
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Logo(),
-          ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/new'),
-              child: Text("New Game")),
-          ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/join'),
-              child: Text("Join Game")),
-          ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/lobby'),
-              child: Text("Testing")),
-        ],
-      ),
-      ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Logo(),
+              ElevatedButton(
+                  onPressed: () => Navigator.pushNamed(context, '/new'),
+                  child: Text("New Game")),
+              ElevatedButton(
+                  onPressed: () => Navigator.pushNamed(context, '/join'),
+                  child: Text("Join Game")),
+              ElevatedButton(
+                  onPressed: () => Navigator.pushNamed(context, '/testing'),
+                  child: Text("Testing")),
+            ],
+          ),
+        ),
       ),
     );
   }

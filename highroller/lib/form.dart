@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 class DropdownMenu extends StatefulWidget {
   const DropdownMenu({Key? key}) : super(key: key);
@@ -9,6 +12,13 @@ class DropdownMenu extends StatefulWidget {
 
 class _DropdownMenuState extends State<DropdownMenu> {
   String dropdownValue = 'Chips Only';
+  // final textcontroller = TextEditingController();
+  final databaseRef = FirebaseDatabase.instance.reference();
+  final Future<FirebaseApp> _future = Firebase.initializeApp();
+
+  void addData(String data) {
+    databaseRef.push().set({'user': data, 'chips': 5});
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -9,15 +9,15 @@ class TestPage extends StatefulWidget {
 
 class _TestPageState extends State<TestPage> {
   final textcontroller = TextEditingController();
-  final databaseRef = FirebaseDatabase.instance.reference();
+  final db = FirebaseDatabase.instance.reference();
   final Future<FirebaseApp> _future = Firebase.initializeApp();
 
   void addData(String data) {
-    databaseRef.push().set({'user': data, 'chips': 5});
+    db.push().set({'name': data, 'comment': 'A good season'});
   }
 
   void printFirebase() {
-    databaseRef.once().then((DataSnapshot snapshot) {
+    db.once().then((DataSnapshot snapshot) {
       print('Data : ${snapshot.value}');
     });
   }
@@ -47,7 +47,8 @@ class _TestPageState extends State<TestPage> {
                     ),
                     SizedBox(height: 30.0),
                     Center(
-                        child: ElevatedButton(
+                        child: RaisedButton(
+                            color: Colors.pinkAccent,
                             child: Text("Save to Database"),
                             onPressed: () {
                               addData(textcontroller.text);
