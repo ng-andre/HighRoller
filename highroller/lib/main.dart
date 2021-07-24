@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:highroller/firebase.dart';
+import 'package:highroller/gamelobbybeta.dart';
 import 'setup.dart';
 import 'game.dart';
 import 'mahjong.dart';
 import 'newgamebeta.dart';
 import 'joingamebeta.dart';
+import 'mahjonggame.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,9 +21,12 @@ Future<void> main() async {
       '/': (context) => HomePage(),
       '/new': (context) => BetaNewGame(),
       '/join': (context) => BetaJoinGame(),
+      '/joinbeta': (context) => NewGame(),
       '/game': (context) => GameHome(),
-      '/mahjong': (context) => MahjongSetup(),
-      '/testing': (context) => TestPage(),
+      // '/mahjong': (context) => MahjongSetup(),
+      '/testing': (context) => MahjongLobby(
+          // text: "test",
+          ),
     },
   ));
 }
@@ -35,7 +40,9 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Spacer(flex: 3),
               Logo(),
+              Spacer(),
               ElevatedButton(
                   onPressed: () => Navigator.pushNamed(context, '/new'),
                   child: Text("New Game")),
@@ -45,6 +52,7 @@ class HomePage extends StatelessWidget {
               ElevatedButton(
                   onPressed: () => Navigator.pushNamed(context, '/testing'),
                   child: Text("Testing")),
+              Spacer(flex: 4),
             ],
           ),
         ),

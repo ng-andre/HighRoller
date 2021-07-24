@@ -6,12 +6,28 @@ import 'package:random_string/random_string.dart';
 import 'dart:math' show Random;
 import 'gamelobbybeta.dart';
 
-class BetaJoinGame extends StatelessWidget {
+class BetaJoinGame extends StatefulWidget {
   // const BetaNewGame({ Key? key }) : super(key: key);
 
+  @override
+  _BetaJoinGameState createState() => _BetaJoinGameState();
+}
+
+class _BetaJoinGameState extends State<BetaJoinGame> {
   final textcontroller = TextEditingController();
+
   final textcontroller2 = TextEditingController();
+
   final db = FirebaseDatabase.instance.reference();
+
+  var chips;
+
+  int updateChips(roomID) {
+    db.child(roomID).child('initial').once().then((DataSnapshot snapshot) {
+      chips = snapshot.value;
+    });
+    return 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,19 +59,15 @@ class BetaJoinGame extends StatelessWidget {
                 Spacer(flex: 2),
                 ElevatedButton(
                     onPressed: () {
-                      //get initial value and set
-                      final data = db.child("Users");
+                      final String room = textcontroller2.text.toUpperCase();
+                      updateChips(room);
 
-                      final int chips = db.child(textcontroller2.text.toUpperCase()).child("initial").once().getValue();
-                      db
-                          .child(textcontroller2.text.toUpperCase())
-                          .child(textcontroller.text)
-                          .set(chips);
+                      db.child(room).child(textcontroller.text).set(chips);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => GameLobby(
-                              text: textcontroller2.text.toUpperCase(),
+                              text: room,
                             ),
                           ));
                     },
@@ -68,8 +80,4 @@ class BetaJoinGame extends StatelessWidget {
       ),
     );
   }
-}
-
-void ValidateRoom(String roomID) {
-  db.
 }

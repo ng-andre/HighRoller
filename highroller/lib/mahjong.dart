@@ -6,45 +6,48 @@ class MahjongSetup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(100.0),
-        child: Column(
-          children: [
-            Text(
-              "Mahjong Mode",
-              textScaleFactor: 2,
-            ),
-            Spacer(
-              flex: 2,
-            ),
-            Text("Select Mode:"),
-            MahjongDropdown(),
-            Spacer(),
-            Text("Tai Limit"),
-            TextFormField(
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-              ],
-              keyboardType: TextInputType.number,
-              // The validator receives the text that the user has entered.
-              validator: (value) {
-                // if (value == null || value < 0) {
-                //   return 'Please enter a Room Key';
-                // }
-                // return 'Please enter a Room Key';
-              },
-            ),
-            Spacer(),
-            ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, '/game'),
-                child: Text("Done")),
-            Spacer(
-              flex: 4,
-            )
-          ],
+    return Visibility(
+      visible: false,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(100.0),
+          child: Column(
+            children: [
+              Text(
+                "Mahjong Mode",
+                textScaleFactor: 2,
+              ),
+              Spacer(
+                flex: 2,
+              ),
+              Text("Select Mode:"),
+              MahjongDropdown(),
+              Spacer(),
+              Text("Tai Limit"),
+              TextFormField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                keyboardType: TextInputType.number,
+                // The validator receives the text that the user has entered.
+                validator: (value) {
+                  // if (value == null || value < 0) {
+                  //   return 'Please enter a Room Key';
+                  // }
+                  // return 'Please enter a Room Key';
+                },
+              ),
+              Spacer(),
+              ElevatedButton(
+                  onPressed: () => Navigator.pushNamed(context, '/game'),
+                  child: Text("Done")),
+              Spacer(
+                flex: 4,
+              )
+            ],
+          ),
         ),
       ),
     );

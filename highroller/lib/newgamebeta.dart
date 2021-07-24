@@ -13,6 +13,10 @@ class BetaNewGame extends StatelessWidget {
   final textcontroller2 = TextEditingController();
   final db = FirebaseDatabase.instance.reference();
 
+  String GenerateRoomID() {
+    return randomAlphaNumeric(5).toUpperCase();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,8 +77,4 @@ class BetaNewGame extends StatelessWidget {
       ),
     );
   }
-}
-
-String GenerateRoomID() {
-  return randomAlphaNumeric(5).toUpperCase();
 }

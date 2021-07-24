@@ -1,5 +1,71 @@
 # Orbital
 
+GitHub Link:
+
+https://github.com/ng-andre/HighRoller
+
+Demo Link:
+Telegram Bot: @demo1998bot 
+Note: Still not fully functioning, only basic offline features are present
+
+Tech Stack:
+Flutter SDK
+Firebase Realtime Database
+Telegram API for Telegram Bot
+ 
+Figma Prototype
+https://www.figma.com/file/ve5koqcc0X5k27uzBg1uuR/First-Draft?node-id=43%3A3521
+
+
+Project Timeline:
+
+
+
+Milestone 1:
+Learning Tech Stack
+Initial Design Draft and Prototyping of App
+Research 
+Basic Telegram Bot with tracking functionality
+
+Milestone 2: 
+Minimum Viable Product (MVP)
+Users are able to create rooms and join using simple invite codes
+Basic application functionality is present 
+Able to make payments to other users
+Generate a final tally of the game at the end 
+Sync between different devices across Firebase Realtime Database
+
+To do for Milestone 3:
+Additional Features:
+Implement different game modes such as Mahjong and Blackjack (in progress)
+Local storage of Match History
+Sync games with Telegram API
+Allow collection of payment from another player only with their approval (to decide)
+
+
+Project Log:
+
+Learn about Firebase 3 hrs
+Learn Flutter 5 hrs
+Meetings 5 hrs
+Designing App Logo 3 hrs
+Write ReadMe and Documentation 5 hrs
+WireFraming on Figma 5 hrs
+Making Poster and Video 8 hrs 
+Creating TimeLine for the Project 1.5 hrs
+Writing User Story 1.5hrs
+Learning about writing Telegram Bot 3 hrs
+Learning JavaScript Syntax 1.5 hrs
+Writing Telegram Bot Script for money Tracking 2hrs
+Setting up the Development Environment for Flutter 3 hrs
+Meeting with mentor 1.5 hrs
+Write Login Page 3hrs
+Write InGamePage 3hrs
+Write Logic for the InGame Page for transaction 8 hrs
+Initializing Join Game and New Game using FireBase 7 hrs
+Debugging 8 hrs
+
+
 Motivation:
 
 When playing card games such as Poker or Blackjack with friends, tracking payment is always a hassle without the use of cash or chips. Players often have to resort to rudimentary means such as using the calculator or notes on their smartphone in order to track wins and losses.  
@@ -35,37 +101,3 @@ Scenario: Players that finish the game and want to know how much to pay each oth
 Feature: Able to show how much you have won/lost over the past few games.
 Scenario: Players who want to know how well he has been doing for the past few games can look at the game history to see his winnings and losses.
 
-Telegram Bot provides a chat-like interface and can be added into an existing chat group to provide the functionalities of the app in a more easily accessible form
-Able to start the bot in a common group where all players are presents
-Allow players to start new session and join crossplatform
-Set starting sum for all players and game rules
-Alternative game modes (Mahjong, Blackjack, Poker, common pot)
-Update database after every transaction by using command like (/pay @username amount) --------
-Allow collection of payment from another player only with their approval.
-(/show) to display the winning of individual 
-(/showall) to display the current winning/ losses in a group
-Display final tally at the end of a session (Algorithm used as way to simplify final transaction)
-Display Match History of the past 10 games with wins and losses 
-
-
-
-
-
-
-
-
-
-
-To Do:
-Basic Functionality 
-  Tracking of funds
-  Sync among players
-  
-Single Session Instance on Server
-
-
-
-Roles and Responsibilities
-
-
-https://stackoverflow.com/questions/974922/algorithm-to-share-settle-expenses-among-a-group
