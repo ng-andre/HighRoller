@@ -5,15 +5,26 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:random_string/random_string.dart';
 import 'dart:math' show Random;
 import 'gamelobbybeta.dart';
+import 'Blackjack/banker21.dart';
+import 'Blackjack/player21.dart';
+import 'Mahjong/mahjongsetup.dart';
 
-class BetaNewGame extends StatelessWidget {
+class BetaNewGame extends StatefulWidget {
   // const BetaNewGame({ Key? key }) : super(key: key);
+  @override
+  _BetaNewGameState createState() => _BetaNewGameState();
+}
+
+class _BetaNewGameState extends State<BetaNewGame> {
+  String dropdownGameMode = 'Chips Only';
 
   final textcontroller = TextEditingController();
+
   final textcontroller2 = TextEditingController();
+
   final db = FirebaseDatabase.instance.reference();
 
-  String GenerateRoomID() {
+  String generateRoomID() {
     return randomAlphaNumeric(5).toUpperCase();
   }
 
@@ -46,11 +57,40 @@ class BetaNewGame extends StatelessWidget {
                   controller: textcontroller2,
                 ),
                 Spacer(flex: 2),
+                DropdownButton<String>(
+                  value: dropdownGameMode,
+                  icon: const Icon(Icons.arrow_downward),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.black),
+                  underline: Container(
+                    // padding: EdgeInsets.all(7),
+                    height: 2,
+                    color: Colors.blue,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownGameMode = newValue!;
+                    });
+                  },
+                  items: <String>[
+                    'Chips Only',
+                    'Blackjack',
+                    'Mahjong',
+                    // 'Chips with Common Pool'
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                Spacer(flex: 2),
                 ElevatedButton(
                     onPressed: () {
-                      final String roomID = GenerateRoomID();
-                      print(textcontroller.text);
-                      print(textcontroller2.text);
+                      final String roomID = generateRoomID();
+                      // print(textcontroller.text);
+                      // print(textcontroller2.text);
                       db
                           .child(roomID)
                           .child(textcontroller.text)
@@ -62,9 +102,11 @@ class BetaNewGame extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => GameLobby(
-                            text: roomID,
-                          ),
+                          builder: (context) => (dropdownGameMode == "Mahjong")
+                              ? MahjongNewGame(text: roomID)
+                              : Banker21(
+                                  text: roomID,
+                                ),
                         ),
                       );
                     },

@@ -3,14 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:highroller/firebase.dart';
+import 'package:highroller/Blackjack/banker21.dart';
 import 'package:highroller/gamelobbybeta.dart';
-import 'setup.dart';
-import 'game.dart';
-import 'mahjong.dart';
+import 'Blackjack/player21.dart';
 import 'newgamebeta.dart';
 import 'joingamebeta.dart';
-import 'mahjonggame.dart';
+import 'Mahjong/mahjonggame.dart';
+import 'Mahjong/mahjongsetup.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,12 +20,11 @@ Future<void> main() async {
       '/': (context) => HomePage(),
       '/new': (context) => BetaNewGame(),
       '/join': (context) => BetaJoinGame(),
-      '/joinbeta': (context) => NewGame(),
-      '/game': (context) => GameHome(),
-      // '/mahjong': (context) => MahjongSetup(),
-      '/testing': (context) => MahjongLobby(
-          // text: "test",
-          ),
+      // '/game': (context) => GameHome(),
+      '/mahjong': (context) => MahjongNewGame(text: "test"),
+      '/testing': (context) => MahjongLobby(text: "test"),
+      '/banker21': (context) => Banker21(text: "TEST"),
+      '/player21': (context) => Player21(text: "TEST"),
     },
   ));
 }
@@ -49,9 +47,9 @@ class HomePage extends StatelessWidget {
               ElevatedButton(
                   onPressed: () => Navigator.pushNamed(context, '/join'),
                   child: Text("Join Game")),
-              ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(context, '/testing'),
-                  child: Text("Testing")),
+              // ElevatedButton(
+              //     onPressed: () => Navigator.pushNamed(context, '/mahjong'),
+              //     child: Text("Testing")),
               Spacer(flex: 4),
             ],
           ),

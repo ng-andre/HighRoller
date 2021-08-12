@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:highroller/firebase.dart';
 
 //<Testing>
 //For testing purpose everyone initialises with 100 dollars

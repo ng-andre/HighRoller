@@ -1,10 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'newgamebeta.dart';
+import 'data.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 class GameLobby extends StatefulWidget {
   final String text;
@@ -16,6 +16,8 @@ class GameLobby extends StatefulWidget {
 
 class _GameLobbyState extends State<GameLobby> {
   final db = FirebaseDatabase.instance.reference();
+  TextEditingController _messageController = TextEditingController();
+  ScrollController _scrollController = ScrollController();
 
   var chips1 = 0; //from
   var chips2 = 0; //to
@@ -32,6 +34,40 @@ class _GameLobbyState extends State<GameLobby> {
     db.child(widget.text).child(to).once().then((DataSnapshot snapshot) {
       chips2 = snapshot.value;
     });
+  }
+
+  Query getMessageQuery() {
+    return db.child(widget.text);
+  }
+
+  Widget PlayerList() {
+    return Expanded(
+      child: FirebaseAnimatedList(
+        controller: _scrollController,
+        query: db.child(widget.text),
+        itemBuilder: (context, snapshot, animation, index) {
+          final json = snapshot.value as Map<dynamic, dynamic>;
+          final playername = Message.fromJson(json);
+          final playerchips = chips.fromJson(json);
+          return Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Spacer(),
+                  Text(""),
+                  Spacer(flex: 2),
+                  Text("    Chips "),
+                  Spacer(flex: 2),
+                  Text("Action"),
+                  Spacer(),
+                ],
+              )
+            ],
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -51,15 +87,17 @@ class _GameLobbyState extends State<GameLobby> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Spacer(),
-                        Text("Player"),
+                        Text(" Player"),
                         Spacer(flex: 2),
-                        Text("Chips    "),
+                        Text("    Chips "),
                         Spacer(flex: 2),
                         Text("  Action     "),
                         Spacer(),
                       ],
                     ),
-                    PlayerWidget(),
+
+                    PlayerTile(text: "player1", money: 500, visible: false),
+                    // PlayerTile(text: "bob", money: 300, visible: true)
                   ],
                 )
               ],
@@ -69,14 +107,28 @@ class _GameLobbyState extends State<GameLobby> {
   }
 }
 
-class PlayerWidget extends StatefulWidget {
-  // const PlayerWidget();
+class PlayerTile extends StatefulWidget {
+  final String text;
+  final int money;
+  final bool visible;
+
+  PlayerTile({required this.text, required this.money, required this.visible});
 
   @override
-  _PlayerWidgetState createState() => _PlayerWidgetState();
+  _PlayerTileState createState() => _PlayerTileState();
 }
 
-class _PlayerWidgetState extends State<PlayerWidget> {
+class _PlayerTileState extends State<PlayerTile> {
+  int _payment = 0;
+
+  void _paymentPopup() async {
+    // this will contain the result from Navigator.pop(context, result)
+    final newTai = await showDialog<double>(
+      context: context,
+      builder: (context) => PaymentDialog(chips: _payment),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -86,65 +138,65 @@ class _PlayerWidgetState extends State<PlayerWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Spacer(),
-            Text("john"),
+            Text(this.widget.text),
             Spacer(flex: 2),
-            Text("50"),
+            Text(this.widget.money.toString()),
             Spacer(flex: 2),
-            ElevatedButton(onPressed: null, child: Text("Pay")),
+            ElevatedButton(
+              onPressed: this.widget.visible ? _paymentPopup : null,
+              child: Text("Pay"),
+            ),
             Spacer(),
           ],
         ),
-        Player2(),
       ],
     );
   }
 }
 
-class Player2 extends StatelessWidget {
-  // const Player2({Key? key}) : super(key: key);
+class PaymentDialog extends StatefulWidget {
+  final int chips;
+
+  const PaymentDialog({required this.chips});
+
+  @override
+  _PaymentDialogState createState() => _PaymentDialogState();
+}
+
+class _PaymentDialogState extends State<PaymentDialog> {
+  int _chips = 1;
   final textcontroller2 = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _chips = widget.chips;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Spacer(),
-            Text("bob"),
-            Spacer(flex: 2),
-            Text("150"),
-            Spacer(flex: 2),
-            ElevatedButton(
-                onPressed: () => showDialog<String>(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: const Text('How much to pay?'),
-                        content: TextField(
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          keyboardType: TextInputType.number,
-                          controller: textcontroller2,
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'Cancel'),
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'OK'),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      ),
-                    ),
-                child: Text("Pay")),
-            Spacer(),
-          ],
+    return AlertDialog(
+      title: Text('Enter Chips'),
+      content: TextField(
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+        ],
+        keyboardType: TextInputType.number,
+        controller: textcontroller2,
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
         ),
+        TextButton(
+          onPressed: () {
+            // Use the second argument of Navigator.pop(...) to pass
+            // back a result to the page that opened the dialog
+            Navigator.pop(context, _chips);
+          },
+          child: Text('OK'),
+        )
       ],
     );
   }
